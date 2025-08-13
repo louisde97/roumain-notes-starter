@@ -266,7 +266,7 @@ def review(concept_id: int, quality: int):
     with Session(engine) as session:
         card = session.exec(select(Card).where(Card.concept_id == concept_id)).first()
         if not card:
-            card = Card(concept_id=concept_id, front=\"\", back=\"\")
+            card = Card(concept_id=concept_id, front="", back="")
         # SM-2 logic (simplified)
         q = max(0, min(5, int(quality)))
         if q < 3:
