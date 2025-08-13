@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function Home() {
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
 
-  async function handleUpload(e: React.FormEvent) {
+  async function handleUpload(e) {
     e.preventDefault();
     setError(null);
     if (!file) { setError('Choisis un fichier .docx ou .pptx'); return; }
@@ -21,15 +21,15 @@ export default function Home() {
       const json = await res.json();
       if (!res.ok || json.error) throw new Error(json.error || 'Erreur serveur');
       setResult(json);
-    } catch (err:any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err?.message || 'Erreur inconnue');
     } finally {
       setLoading(false);
     }
   }
 
   const catsOrder = ['vocab','conjugaison','prononciation','grammaire','expression','orthographe','culture'];
-  function catLabel(c:string){ 
+  function catLabel(c){ 
     return {vocab:'Vocabulaire', conjugaison:'Conjugaison', prononciation:'Prononciation', grammaire:'Grammaire', expression:'Expressions', orthographe:'Orthographe', culture:'Culture'}[c] || c; 
   }
 
@@ -54,7 +54,7 @@ export default function Home() {
               <div key={c} className="mt-4">
                 <h3 className="font-semibold mb-2">{catLabel(c)}</h3>
                 <ul className="space-y-1">
-                  {items.map((it:any, idx:number)=>(
+                  {items.map((it, idx)=>(
                     <li key={idx} className="bg-white border rounded px-3 py-2 flex items-center justify-between">
                       <span>{it.title}</span>
                       {it.is_revision && <span className="text-xs px-2 py-1 rounded bg-yellow-100 border border-yellow-300">Révision</span>}
