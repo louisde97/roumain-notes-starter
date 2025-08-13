@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: roumain-backend
+    env: python
+    plan: free
+    repo: https://github.com/USER/roumain-notes-starter
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: roumain-db
+          property: connectionString
+      - key: CORS_ORIGINS
+        value: https://your-frontend-domain.vercel.app
+databases:
+  - name: roumain-db
+    plan: free
