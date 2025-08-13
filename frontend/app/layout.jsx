@@ -1,4 +1,4 @@
-// frontend/app/layout.tsx
+// frontend/app/layout.jsx
 import './globals.css';
 import React from 'react';
 
@@ -7,7 +7,7 @@ export const metadata = {
   description: 'Importer et analyser tes cours de roumain (.docx/.pptx)',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body>{children}</body>
